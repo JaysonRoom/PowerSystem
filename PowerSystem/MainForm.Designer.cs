@@ -47,6 +47,10 @@
             this.eleChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.volChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.btnStop = new System.Windows.Forms.Button();
+            this.comboUnit = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.getPoint = new System.Windows.Forms.NumericUpDown();
             this.label14 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -62,8 +66,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.comboUnit = new System.Windows.Forms.ComboBox();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -250,6 +252,8 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.btnSave);
+            this.groupBox2.Controls.Add(this.btnStop);
             this.groupBox2.Controls.Add(this.comboUnit);
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Controls.Add(this.getPoint);
@@ -272,6 +276,47 @@
             this.groupBox2.Size = new System.Drawing.Size(382, 408);
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
+            // 
+            // btnSave
+            // 
+            this.btnSave.Location = new System.Drawing.Point(278, 367);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(89, 31);
+            this.btnSave.TabIndex = 20;
+            this.btnSave.Text = "保存";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // btnStop
+            // 
+            this.btnStop.Location = new System.Drawing.Point(278, 330);
+            this.btnStop.Name = "btnStop";
+            this.btnStop.Size = new System.Drawing.Size(89, 31);
+            this.btnStop.TabIndex = 19;
+            this.btnStop.Text = "停止";
+            this.btnStop.UseVisualStyleBackColor = true;
+            this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
+            // 
+            // comboUnit
+            // 
+            this.comboUnit.FormattingEnabled = true;
+            this.comboUnit.Items.AddRange(new object[] {
+            "小时",
+            "分钟",
+            "秒"});
+            this.comboUnit.Location = new System.Drawing.Point(115, 287);
+            this.comboUnit.Name = "comboUnit";
+            this.comboUnit.Size = new System.Drawing.Size(121, 27);
+            this.comboUnit.TabIndex = 18;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(2, 291);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(109, 19);
+            this.label3.TabIndex = 17;
+            this.label3.Text = "时间单位：";
             // 
             // getPoint
             // 
@@ -319,7 +364,7 @@
             // 
             // btnStart
             // 
-            this.btnStart.Location = new System.Drawing.Point(277, 354);
+            this.btnStart.Location = new System.Drawing.Point(278, 291);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(89, 31);
             this.btnStart.TabIndex = 10;
@@ -338,7 +383,6 @@
             this.closeTime.Name = "closeTime";
             this.closeTime.Size = new System.Drawing.Size(120, 29);
             this.closeTime.TabIndex = 9;
-            this.closeTime.ValueChanged += new System.EventHandler(this.closeTime_ValueChanged);
             // 
             // openTime
             // 
@@ -351,7 +395,6 @@
             this.openTime.Name = "openTime";
             this.openTime.Size = new System.Drawing.Size(120, 29);
             this.openTime.TabIndex = 8;
-            this.openTime.ValueChanged += new System.EventHandler(this.openTime_ValueChanged);
             // 
             // cycleNum
             // 
@@ -364,7 +407,6 @@
             this.cycleNum.Name = "cycleNum";
             this.cycleNum.Size = new System.Drawing.Size(120, 29);
             this.cycleNum.TabIndex = 7;
-            this.cycleNum.ValueChanged += new System.EventHandler(this.cycleNum_ValueChanged);
             // 
             // eleVal
             // 
@@ -438,27 +480,6 @@
             this.label4.TabIndex = 0;
             this.label4.Text = "电压：";
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(2, 291);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(109, 19);
-            this.label3.TabIndex = 17;
-            this.label3.Text = "时间单位：";
-            // 
-            // comboUnit
-            // 
-            this.comboUnit.FormattingEnabled = true;
-            this.comboUnit.Items.AddRange(new object[] {
-            "小时",
-            "分钟",
-            "秒"});
-            this.comboUnit.Location = new System.Drawing.Point(115, 287);
-            this.comboUnit.Name = "comboUnit";
-            this.comboUnit.Size = new System.Drawing.Size(121, 27);
-            this.comboUnit.TabIndex = 18;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -520,6 +541,8 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.ComboBox comboUnit;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.Button btnStop;
     }
 }
 

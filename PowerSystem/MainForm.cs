@@ -320,5 +320,18 @@ namespace PowerSystem
            // volChart.ChartAreas[0].AxisX.Maximum = curD.ToString("mm:ss");// MaxVal;
             //eleChart.ChartAreas[0].AxisX.Maximum = MaxVal;            
         }
+
+        private void btnStop_Click(object sender, EventArgs e)
+        {
+            startTimer.Enabled = false;
+            openPoint = 0;
+            closeTimer.Enabled = false;
+            closePoint = 0;
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+           // volChart.Series[0].Points
+        }
     }
 }
