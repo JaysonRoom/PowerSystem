@@ -47,9 +47,8 @@
             this.eleChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.volChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.btnStop = new System.Windows.Forms.Button();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
+            this.getPoint = new System.Windows.Forms.NumericUpDown();
+            this.label14 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.btnStart = new System.Windows.Forms.Button();
@@ -63,7 +62,8 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.bgWork = new System.ComponentModel.BackgroundWorker();
+            this.label3 = new System.Windows.Forms.Label();
+            this.comboUnit = new System.Windows.Forms.ComboBox();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -72,6 +72,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.eleChart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.volChart)).BeginInit();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.getPoint)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.closeTime)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.openTime)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cycleNum)).BeginInit();
@@ -88,7 +89,7 @@
             this.tabControl1.Location = new System.Drawing.Point(13, 13);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1213, 708);
+            this.tabControl1.Size = new System.Drawing.Size(1282, 708);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage2
@@ -101,7 +102,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 64);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1205, 640);
+            this.tabPage2.Size = new System.Drawing.Size(1274, 640);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "设备管理";
             // 
@@ -113,16 +114,16 @@
             this.groupBox4.Controls.Add(this.ipAddress);
             this.groupBox4.Controls.Add(this.label10);
             this.groupBox4.Controls.Add(this.label11);
-            this.groupBox4.Location = new System.Drawing.Point(17, 20);
+            this.groupBox4.Location = new System.Drawing.Point(6, 11);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(371, 233);
+            this.groupBox4.Size = new System.Drawing.Size(382, 194);
             this.groupBox4.TabIndex = 3;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "电源配置";
             // 
             // btnOpen
             // 
-            this.btnOpen.Location = new System.Drawing.Point(123, 169);
+            this.btnOpen.Location = new System.Drawing.Point(123, 148);
             this.btnOpen.Name = "btnOpen";
             this.btnOpen.Size = new System.Drawing.Size(75, 31);
             this.btnOpen.TabIndex = 5;
@@ -133,7 +134,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(42, 174);
+            this.label9.Location = new System.Drawing.Point(42, 153);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(49, 19);
             this.label9.TabIndex = 4;
@@ -141,7 +142,7 @@
             // 
             // port
             // 
-            this.port.Location = new System.Drawing.Point(123, 109);
+            this.port.Location = new System.Drawing.Point(123, 95);
             this.port.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -159,7 +160,7 @@
             // ipAddress
             // 
             this.ipAddress.BackColor = System.Drawing.SystemColors.Window;
-            this.ipAddress.Location = new System.Drawing.Point(123, 51);
+            this.ipAddress.Location = new System.Drawing.Point(123, 41);
             this.ipAddress.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
             this.ipAddress.MinimumSize = new System.Drawing.Size(207, 29);
             this.ipAddress.Name = "ipAddress";
@@ -170,7 +171,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(22, 111);
+            this.label10.Location = new System.Drawing.Point(22, 97);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(89, 19);
             this.label10.TabIndex = 1;
@@ -179,7 +180,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(22, 53);
+            this.label11.Location = new System.Drawing.Point(22, 43);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(91, 19);
             this.label11.TabIndex = 0;
@@ -191,58 +192,68 @@
             this.groupBox3.Controls.Add(this.volChart);
             this.groupBox3.Location = new System.Drawing.Point(394, 20);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(789, 599);
+            this.groupBox3.Size = new System.Drawing.Size(870, 599);
             this.groupBox3.TabIndex = 1;
             this.groupBox3.TabStop = false;
             // 
             // eleChart
             // 
+            chartArea1.AxisX.Interval = 1D;
             chartArea1.AxisX.Maximum = 100D;
             chartArea1.AxisX.Minimum = 0D;
+            chartArea1.AxisX.ScaleView.Size = 20D;
             chartArea1.AxisY.LogarithmBase = 5D;
-            chartArea1.AxisY.Maximum = 5D;
             chartArea1.AxisY.Minimum = 0D;
             chartArea1.Name = "ChartArea1";
             this.eleChart.ChartAreas.Add(chartArea1);
+            legend1.DockedToChartArea = "ChartArea1";
             legend1.Name = "Legend1";
             this.eleChart.Legends.Add(legend1);
-            this.eleChart.Location = new System.Drawing.Point(6, 324);
+            this.eleChart.Location = new System.Drawing.Point(6, 306);
             this.eleChart.Name = "eleChart";
+            series1.BorderWidth = 3;
             series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series1.Color = System.Drawing.Color.Red;
             series1.Legend = "Legend1";
             series1.Name = "电流";
+            series1.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Time;
             this.eleChart.Series.Add(series1);
-            this.eleChart.Size = new System.Drawing.Size(777, 269);
+            this.eleChart.Size = new System.Drawing.Size(853, 281);
             this.eleChart.TabIndex = 2;
             this.eleChart.Text = "chart2";
             // 
             // volChart
             // 
-            chartArea2.AxisX.Maximum = 100D;
-            chartArea2.AxisX.Minimum = 0D;
+            chartArea2.AxisX.Interval = 1D;
             chartArea2.AxisY.Maximum = 20D;
             chartArea2.AxisY.Minimum = 0D;
             chartArea2.Name = "ChartArea1";
             this.volChart.ChartAreas.Add(chartArea2);
+            legend2.DockedToChartArea = "ChartArea1";
+            legend2.MaximumAutoSize = 40F;
             legend2.Name = "Legend1";
             this.volChart.Legends.Add(legend2);
-            this.volChart.Location = new System.Drawing.Point(6, 14);
+            this.volChart.Location = new System.Drawing.Point(6, 1);
             this.volChart.Name = "volChart";
+            series2.BorderWidth = 3;
             series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series2.Color = System.Drawing.Color.DodgerBlue;
             series2.Legend = "Legend1";
             series2.Name = "电压";
+            series2.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Time;
             this.volChart.Series.Add(series2);
-            this.volChart.Size = new System.Drawing.Size(777, 269);
+            this.volChart.Size = new System.Drawing.Size(853, 280);
             this.volChart.TabIndex = 1;
             this.volChart.Text = "chart1";
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.btnStop);
-            this.groupBox2.Controls.Add(this.label13);
-            this.groupBox2.Controls.Add(this.label12);
+            this.groupBox2.Controls.Add(this.comboUnit);
+            this.groupBox2.Controls.Add(this.label3);
+            this.groupBox2.Controls.Add(this.getPoint);
+            this.groupBox2.Controls.Add(this.label14);
             this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Controls.Add(this.btnStart);
@@ -256,45 +267,42 @@
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.label4);
-            this.groupBox2.Location = new System.Drawing.Point(17, 259);
+            this.groupBox2.Location = new System.Drawing.Point(6, 211);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(371, 360);
+            this.groupBox2.Size = new System.Drawing.Size(382, 408);
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
             // 
-            // btnStop
+            // getPoint
             // 
-            this.btnStop.Location = new System.Drawing.Point(261, 300);
-            this.btnStop.Name = "btnStop";
-            this.btnStop.Size = new System.Drawing.Size(89, 31);
-            this.btnStop.TabIndex = 15;
-            this.btnStop.Text = "停止";
-            this.btnStop.UseVisualStyleBackColor = true;
-            this.btnStop.Visible = false;
-            this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
+            this.getPoint.Location = new System.Drawing.Point(115, 331);
+            this.getPoint.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.getPoint.Name = "getPoint";
+            this.getPoint.Size = new System.Drawing.Size(120, 29);
+            this.getPoint.TabIndex = 16;
+            this.getPoint.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
             // 
-            // label13
+            // label14
             // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(235, 252);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(20, 19);
-            this.label13.TabIndex = 14;
-            this.label13.Text = "S";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(235, 197);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(20, 19);
-            this.label12.TabIndex = 13;
-            this.label12.Text = "S";
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(21, 336);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(89, 19);
+            this.label14.TabIndex = 15;
+            this.label14.Text = "采样点：";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(235, 85);
+            this.label2.Location = new System.Drawing.Point(243, 81);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(20, 19);
             this.label2.TabIndex = 11;
@@ -303,7 +311,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(235, 28);
+            this.label1.Location = new System.Drawing.Point(243, 29);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(20, 19);
             this.label1.TabIndex = 6;
@@ -311,7 +319,7 @@
             // 
             // btnStart
             // 
-            this.btnStart.Location = new System.Drawing.Point(155, 300);
+            this.btnStart.Location = new System.Drawing.Point(277, 354);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(89, 31);
             this.btnStart.TabIndex = 10;
@@ -321,7 +329,7 @@
             // 
             // closeTime
             // 
-            this.closeTime.Location = new System.Drawing.Point(109, 247);
+            this.closeTime.Location = new System.Drawing.Point(115, 239);
             this.closeTime.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -330,10 +338,11 @@
             this.closeTime.Name = "closeTime";
             this.closeTime.Size = new System.Drawing.Size(120, 29);
             this.closeTime.TabIndex = 9;
+            this.closeTime.ValueChanged += new System.EventHandler(this.closeTime_ValueChanged);
             // 
             // openTime
             // 
-            this.openTime.Location = new System.Drawing.Point(109, 191);
+            this.openTime.Location = new System.Drawing.Point(115, 186);
             this.openTime.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -342,10 +351,11 @@
             this.openTime.Name = "openTime";
             this.openTime.Size = new System.Drawing.Size(120, 29);
             this.openTime.TabIndex = 8;
+            this.openTime.ValueChanged += new System.EventHandler(this.openTime_ValueChanged);
             // 
             // cycleNum
             // 
-            this.cycleNum.Location = new System.Drawing.Point(109, 131);
+            this.cycleNum.Location = new System.Drawing.Point(115, 130);
             this.cycleNum.Maximum = new decimal(new int[] {
             100000,
             0,
@@ -358,7 +368,7 @@
             // 
             // eleVal
             // 
-            this.eleVal.Location = new System.Drawing.Point(109, 79);
+            this.eleVal.Location = new System.Drawing.Point(117, 75);
             this.eleVal.Name = "eleVal";
             this.eleVal.Size = new System.Drawing.Size(120, 29);
             this.eleVal.TabIndex = 6;
@@ -372,7 +382,7 @@
             0,
             0,
             65536});
-            this.volteVal.Location = new System.Drawing.Point(109, 22);
+            this.volteVal.Location = new System.Drawing.Point(117, 23);
             this.volteVal.Maximum = new decimal(new int[] {
             200,
             0,
@@ -386,7 +396,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(4, 249);
+            this.label8.Location = new System.Drawing.Point(4, 244);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(109, 19);
             this.label8.TabIndex = 4;
@@ -428,15 +438,32 @@
             this.label4.TabIndex = 0;
             this.label4.Text = "电压：";
             // 
-            // bgWork
+            // label3
             // 
-            this.bgWork.WorkerReportsProgress = true;
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(2, 291);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(109, 19);
+            this.label3.TabIndex = 17;
+            this.label3.Text = "时间单位：";
+            // 
+            // comboUnit
+            // 
+            this.comboUnit.FormattingEnabled = true;
+            this.comboUnit.Items.AddRange(new object[] {
+            "小时",
+            "分钟",
+            "秒"});
+            this.comboUnit.Location = new System.Drawing.Point(115, 287);
+            this.comboUnit.Name = "comboUnit";
+            this.comboUnit.Size = new System.Drawing.Size(121, 27);
+            this.comboUnit.TabIndex = 18;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1238, 733);
+            this.ClientSize = new System.Drawing.Size(1301, 733);
             this.Controls.Add(this.tabControl1);
             this.Name = "MainForm";
             this.Text = "电源控制系统";
@@ -451,6 +478,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.volChart)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.getPoint)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.closeTime)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.openTime)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cycleNum)).EndInit();
@@ -479,8 +507,6 @@
         private IPAddressControlLib.IPAddressControl ipAddress;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnStart;
@@ -488,10 +514,12 @@
         private System.Windows.Forms.NumericUpDown openTime;
         private System.Windows.Forms.NumericUpDown cycleNum;
         private System.Windows.Forms.NumericUpDown eleVal;
-        private System.Windows.Forms.Button btnStop;
         private System.Windows.Forms.DataVisualization.Charting.Chart eleChart;
         private System.Windows.Forms.DataVisualization.Charting.Chart volChart;
-        private System.ComponentModel.BackgroundWorker bgWork;
+        private System.Windows.Forms.NumericUpDown getPoint;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.ComboBox comboUnit;
+        private System.Windows.Forms.Label label3;
     }
 }
 

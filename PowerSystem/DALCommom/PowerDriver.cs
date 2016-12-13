@@ -236,7 +236,7 @@ namespace PowerSystem.DALCommom
             //    reElect = 0;
 
             //模拟数据
-            reElect = new Random().Next(0, 20);
+            reElect = new Random().Next(0, 5);
             return status;
         }
 

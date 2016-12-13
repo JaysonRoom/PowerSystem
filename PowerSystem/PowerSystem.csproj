@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="DALCommom\CGloabal.cs" />
     <Compile Include="DALCommom\CommonMethod.cs" />
+    <Compile Include="DALCommom\MixHelper.cs" />
     <Compile Include="DALCommom\PowerDriver.cs" />
     <Compile Include="DALCommom\visa32.cs" />
     <Compile Include="MainForm.cs">
