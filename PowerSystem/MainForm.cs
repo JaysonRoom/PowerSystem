@@ -105,6 +105,7 @@ namespace PowerSystem
 
             int error = 0;
             string strErrMsg = "";
+            //设置电压和电流
             //error = PowerDriver.SetVolAndEle(CGloabal.g_InstrPowerModule.nHandle, vlo, ele, strErrMsg);
             //if (error < 0)
             //{
