@@ -22,7 +22,7 @@ namespace PowerSystem.DALCommom
             public InstrMentsParas(string name)
             {
                 this.strInstruName = name;
-                this.ipAdress = "172.141.10.30";
+                this.ipAdress = "192.168.1.30";
                 this.nHandle = 8000;
                 this.bInternet = false;
                 this.nHandle = 0; //默认为0
@@ -32,5 +32,7 @@ namespace PowerSystem.DALCommom
 
         //定义三个仪器的对象
         public static InstrMentsParas g_InstrPowerModule = new InstrMentsParas("电源");
+
+        public static InstrMentsParas g_InstrPowerModule2 = new InstrMentsParas("电源2");
     }
 }

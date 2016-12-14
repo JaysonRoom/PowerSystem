@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -49,6 +50,10 @@ namespace PowerSystem.DALCommom
                 CGloabal.g_InstrPowerModule.ipAdress = GetValueFromIniFile(strFilePath, "电源", "IP地址");
                 strPort = GetValueFromIniFile(strFilePath, "电源", "端口号");
                 CGloabal.g_InstrPowerModule.port = int.Parse(strPort);
+
+                CGloabal.g_InstrPowerModule2.ipAdress = GetValueFromIniFile(strFilePath, "电源2", "IP地址");
+                strPort = GetValueFromIniFile(strFilePath, "电源2", "端口号");
+                CGloabal.g_InstrPowerModule2.port = int.Parse(strPort);
             }
             else
             {
@@ -185,6 +190,16 @@ namespace PowerSystem.DALCommom
                     CGloabal.g_InstrPowerModule.port = (int)port;
                     CGloabal.g_InstrPowerModule.bInternet = true;
                 }
+                if (strInstruName == "电源2")
+                {
+                    //保存到ini文件
+                    CommonMethod.WriteValueToIniFile(strFilePath, "电源2", "IP地址", strIP);
+                    CommonMethod.WriteValueToIniFile(strFilePath, "电源2", "端口号", port.ToString());
+                    //更新当前仪器的参数信息
+                    CGloabal.g_InstrPowerModule2.ipAdress = strIP;
+                    CGloabal.g_InstrPowerModule2.port = (int)port;
+                    CGloabal.g_InstrPowerModule2.bInternet = true;
+                }
                 else
                 {
                     MessageBox.Show("错误的仪器名", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -215,6 +230,78 @@ namespace PowerSystem.DALCommom
             }
             return error;
         }
+
+        public static void SaveToExcel()
+        {
+            Microsoft.Office.Interop.Excel.Application xlApp = new Microsoft.Office.Interop.Excel.Application();
+        }
+
+        public static void SaveToCSV(DataTable dt ,string fullPath)
+        {
+            SaveFileDialog saveFile = new SaveFileDialog();
+            saveFile.FileName = "电源控制测试结果" + System.DateTime.Now.ToString("yyyyMMddHHmmss");
+            //saveFile.Filter = ".csv";
+            saveFile.FilterIndex = 2;
+            saveFile.RestoreDirectory = true;
+
+            if (saveFile.ShowDialog() == DialogResult.OK)
+            {
+                fullPath = saveFile.FileName;
+            }
+            else {
+                return;
+            }
+
+
+            FileInfo fi = new FileInfo(fullPath);
+            if (!fi.Directory.Exists)
+            {
+              fi.Directory.Create();
+            }
+            FileStream fs = new FileStream(fullPath, System.IO.FileMode.Create, System.IO.FileAccess.Write);                     
+            StreamWriter sw = new StreamWriter(fs, System.Text.Encoding.UTF8);
+            string data = "";
+                     //写出列名称
+            for (int i = 0; i < dt.Columns.Count; i++)
+            {
+                data += dt.Columns[i].ColumnName.ToString();
+                if (i < dt.Columns.Count - 1)
+                    {
+                        data += ",";
+                    }
+             }
+            sw.WriteLine(data);
+            //写出各行数据
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                data = "";
+                for (int j = 0; j < dt.Columns.Count; j++)
+                {
+                    string str = dt.Rows[i][j].ToString();
+                    str = str.Replace("\"", "\"\"");//替换英文冒号 英文冒号需要换成两个冒号
+                    if (str.Contains(',') || str.Contains('"')
+                        || str.Contains('\r') || str.Contains('\n')) //含逗号 冒号 换行符的需要放到引号中
+                    {
+                        str = string.Format("\"{0}\"", str);
+                    }
+
+                    data += str;
+                    if (j < dt.Columns.Count - 1)
+                    {
+                        data += ",";
+                    }
+                }
+                sw.WriteLine(data);
+            }
+            sw.Close();
+            fs.Close();
+            DialogResult result = MessageBox.Show("CSV文件保存成功！");
+            if (result == DialogResult.OK)
+            {
+                //System.Diagnostics.Process.Start("explorer.exe", Common.PATH_LANG);
+            }
+        }
+
 
         //定义提示信息枚举体
         public enum eHintInfoType

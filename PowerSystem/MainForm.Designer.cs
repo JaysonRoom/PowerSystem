@@ -34,6 +34,12 @@
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
@@ -66,6 +72,37 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnOpen2 = new System.Windows.Forms.Button();
+            this.label12 = new System.Windows.Forms.Label();
+            this.port2 = new System.Windows.Forms.NumericUpDown();
+            this.ipAddress2 = new IPAddressControlLib.IPAddressControl();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.eleChart2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.volChart2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.btnSave2 = new System.Windows.Forms.Button();
+            this.btnStop2 = new System.Windows.Forms.Button();
+            this.comboUnit2 = new System.Windows.Forms.ComboBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.getPoint2 = new System.Windows.Forms.NumericUpDown();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.btnStart2 = new System.Windows.Forms.Button();
+            this.closeTime2 = new System.Windows.Forms.NumericUpDown();
+            this.openTime2 = new System.Windows.Forms.NumericUpDown();
+            this.cycleNum2 = new System.Windows.Forms.NumericUpDown();
+            this.eleVal2 = new System.Windows.Forms.NumericUpDown();
+            this.volteVal2 = new System.Windows.Forms.NumericUpDown();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.label24 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -80,11 +117,25 @@
             ((System.ComponentModel.ISupportInitialize)(this.cycleNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.eleVal)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.volteVal)).BeginInit();
+            this.tabPage1.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.port2)).BeginInit();
+            this.groupBox5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.eleChart2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.volChart2)).BeginInit();
+            this.groupBox6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.getPoint2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.closeTime2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.openTime2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cycleNum2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.eleVal2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.volteVal2)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Cursor = System.Windows.Forms.Cursors.Default;
             this.tabControl1.Font = new System.Drawing.Font("宋体", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.tabControl1.ItemSize = new System.Drawing.Size(120, 60);
@@ -106,7 +157,7 @@
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(1274, 640);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "设备管理";
+            this.tabPage2.Text = "电源设备1";
             // 
             // groupBox4
             // 
@@ -192,9 +243,9 @@
             // 
             this.groupBox3.Controls.Add(this.eleChart);
             this.groupBox3.Controls.Add(this.volChart);
-            this.groupBox3.Location = new System.Drawing.Point(394, 20);
+            this.groupBox3.Location = new System.Drawing.Point(394, 6);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(870, 599);
+            this.groupBox3.Size = new System.Drawing.Size(870, 613);
             this.groupBox3.TabIndex = 1;
             this.groupBox3.TabStop = false;
             // 
@@ -203,7 +254,6 @@
             chartArea1.AxisX.Interval = 1D;
             chartArea1.AxisX.Maximum = 100D;
             chartArea1.AxisX.Minimum = 0D;
-            chartArea1.AxisX.ScaleView.Size = 20D;
             chartArea1.AxisY.LogarithmBase = 5D;
             chartArea1.AxisY.Minimum = 0D;
             chartArea1.Name = "ChartArea1";
@@ -219,6 +269,7 @@
             series1.Color = System.Drawing.Color.Red;
             series1.Legend = "Legend1";
             series1.Name = "电流";
+            series1.ToolTip = "电流:#VAL A";
             series1.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Time;
             this.eleChart.Series.Add(series1);
             this.eleChart.Size = new System.Drawing.Size(853, 281);
@@ -236,7 +287,7 @@
             legend2.MaximumAutoSize = 40F;
             legend2.Name = "Legend1";
             this.volChart.Legends.Add(legend2);
-            this.volChart.Location = new System.Drawing.Point(6, 1);
+            this.volChart.Location = new System.Drawing.Point(9, 14);
             this.volChart.Name = "volChart";
             series2.BorderWidth = 3;
             series2.ChartArea = "ChartArea1";
@@ -244,6 +295,7 @@
             series2.Color = System.Drawing.Color.DodgerBlue;
             series2.Legend = "Legend1";
             series2.Name = "电压";
+            series2.ToolTip = "电压:#VAL V";
             series2.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Time;
             this.volChart.Series.Add(series2);
             this.volChart.Size = new System.Drawing.Size(853, 280);
@@ -279,7 +331,7 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(278, 367);
+            this.btnSave.Location = new System.Drawing.Point(277, 329);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(89, 31);
             this.btnSave.TabIndex = 20;
@@ -289,7 +341,7 @@
             // 
             // btnStop
             // 
-            this.btnStop.Location = new System.Drawing.Point(278, 330);
+            this.btnStop.Location = new System.Drawing.Point(277, 292);
             this.btnStop.Name = "btnStop";
             this.btnStop.Size = new System.Drawing.Size(89, 31);
             this.btnStop.TabIndex = 19;
@@ -364,7 +416,7 @@
             // 
             // btnStart
             // 
-            this.btnStart.Location = new System.Drawing.Point(278, 291);
+            this.btnStart.Location = new System.Drawing.Point(277, 253);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(89, 31);
             this.btnStart.TabIndex = 10;
@@ -480,14 +532,417 @@
             this.label4.TabIndex = 0;
             this.label4.Text = "电压：";
             // 
+            // tabPage1
+            // 
+            this.tabPage1.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.tabPage1.Controls.Add(this.groupBox1);
+            this.tabPage1.Controls.Add(this.groupBox5);
+            this.tabPage1.Controls.Add(this.groupBox6);
+            this.tabPage1.Location = new System.Drawing.Point(4, 64);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Size = new System.Drawing.Size(1274, 640);
+            this.tabPage1.TabIndex = 2;
+            this.tabPage1.Text = "电源设备2";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.btnOpen2);
+            this.groupBox1.Controls.Add(this.label12);
+            this.groupBox1.Controls.Add(this.port2);
+            this.groupBox1.Controls.Add(this.ipAddress2);
+            this.groupBox1.Controls.Add(this.label13);
+            this.groupBox1.Controls.Add(this.label15);
+            this.groupBox1.Location = new System.Drawing.Point(8, 3);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(382, 207);
+            this.groupBox1.TabIndex = 6;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "电源配置";
+            // 
+            // btnOpen2
+            // 
+            this.btnOpen2.Location = new System.Drawing.Point(123, 148);
+            this.btnOpen2.Name = "btnOpen2";
+            this.btnOpen2.Size = new System.Drawing.Size(75, 31);
+            this.btnOpen2.TabIndex = 5;
+            this.btnOpen2.Text = "打开";
+            this.btnOpen2.UseVisualStyleBackColor = true;
+            this.btnOpen2.Click += new System.EventHandler(this.btnOpen2_Click);
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(42, 153);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(54, 21);
+            this.label12.TabIndex = 4;
+            this.label12.Text = "连接";
+            // 
+            // port2
+            // 
+            this.port2.Location = new System.Drawing.Point(123, 95);
+            this.port2.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.port2.Name = "port2";
+            this.port2.Size = new System.Drawing.Size(207, 31);
+            this.port2.TabIndex = 3;
+            this.port2.Value = new decimal(new int[] {
+            8080,
+            0,
+            0,
+            0});
+            // 
+            // ipAddress2
+            // 
+            this.ipAddress2.BackColor = System.Drawing.SystemColors.Window;
+            this.ipAddress2.Location = new System.Drawing.Point(123, 41);
+            this.ipAddress2.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
+            this.ipAddress2.MinimumSize = new System.Drawing.Size(229, 31);
+            this.ipAddress2.Name = "ipAddress2";
+            this.ipAddress2.ReadOnly = false;
+            this.ipAddress2.Size = new System.Drawing.Size(229, 31);
+            this.ipAddress2.TabIndex = 2;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(22, 97);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(98, 21);
+            this.label13.TabIndex = 1;
+            this.label13.Text = "端口号：";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(22, 43);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(100, 21);
+            this.label15.TabIndex = 0;
+            this.label15.Text = "IP地址：";
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.eleChart2);
+            this.groupBox5.Controls.Add(this.volChart2);
+            this.groupBox5.Location = new System.Drawing.Point(396, 3);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(870, 621);
+            this.groupBox5.TabIndex = 5;
+            this.groupBox5.TabStop = false;
+            // 
+            // eleChart2
+            // 
+            chartArea3.AxisX.Interval = 1D;
+            chartArea3.AxisX.Maximum = 100D;
+            chartArea3.AxisX.Minimum = 0D;
+            chartArea3.AxisY.LogarithmBase = 5D;
+            chartArea3.AxisY.Minimum = 0D;
+            chartArea3.Name = "ChartArea1";
+            this.eleChart2.ChartAreas.Add(chartArea3);
+            legend3.DockedToChartArea = "ChartArea1";
+            legend3.Name = "Legend1";
+            this.eleChart2.Legends.Add(legend3);
+            this.eleChart2.Location = new System.Drawing.Point(6, 306);
+            this.eleChart2.Name = "eleChart2";
+            series3.BorderWidth = 3;
+            series3.ChartArea = "ChartArea1";
+            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series3.Color = System.Drawing.Color.Red;
+            series3.Legend = "Legend1";
+            series3.Name = "电流";
+            series3.ToolTip = "电流:#VAL A";
+            series3.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Time;
+            this.eleChart2.Series.Add(series3);
+            this.eleChart2.Size = new System.Drawing.Size(853, 281);
+            this.eleChart2.TabIndex = 2;
+            this.eleChart2.Text = "chart2";
+            // 
+            // volChart2
+            // 
+            chartArea4.AxisX.Interval = 1D;
+            chartArea4.AxisY.Maximum = 20D;
+            chartArea4.AxisY.Minimum = 0D;
+            chartArea4.Name = "ChartArea1";
+            this.volChart2.ChartAreas.Add(chartArea4);
+            legend4.DockedToChartArea = "ChartArea1";
+            legend4.MaximumAutoSize = 40F;
+            legend4.Name = "Legend1";
+            this.volChart2.Legends.Add(legend4);
+            this.volChart2.Location = new System.Drawing.Point(7, 13);
+            this.volChart2.Name = "volChart2";
+            series4.BorderWidth = 3;
+            series4.ChartArea = "ChartArea1";
+            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series4.Color = System.Drawing.Color.DodgerBlue;
+            series4.Legend = "Legend1";
+            series4.Name = "电压";
+            series4.ToolTip = "电压:#VAL V";
+            series4.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Time;
+            this.volChart2.Series.Add(series4);
+            this.volChart2.Size = new System.Drawing.Size(853, 280);
+            this.volChart2.TabIndex = 1;
+            this.volChart2.Text = "chart1";
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.btnSave2);
+            this.groupBox6.Controls.Add(this.btnStop2);
+            this.groupBox6.Controls.Add(this.comboUnit2);
+            this.groupBox6.Controls.Add(this.label16);
+            this.groupBox6.Controls.Add(this.getPoint2);
+            this.groupBox6.Controls.Add(this.label17);
+            this.groupBox6.Controls.Add(this.label18);
+            this.groupBox6.Controls.Add(this.label19);
+            this.groupBox6.Controls.Add(this.btnStart2);
+            this.groupBox6.Controls.Add(this.closeTime2);
+            this.groupBox6.Controls.Add(this.openTime2);
+            this.groupBox6.Controls.Add(this.cycleNum2);
+            this.groupBox6.Controls.Add(this.eleVal2);
+            this.groupBox6.Controls.Add(this.volteVal2);
+            this.groupBox6.Controls.Add(this.label20);
+            this.groupBox6.Controls.Add(this.label21);
+            this.groupBox6.Controls.Add(this.label22);
+            this.groupBox6.Controls.Add(this.label23);
+            this.groupBox6.Controls.Add(this.label24);
+            this.groupBox6.Location = new System.Drawing.Point(8, 216);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(382, 408);
+            this.groupBox6.TabIndex = 4;
+            this.groupBox6.TabStop = false;
+            // 
+            // btnSave2
+            // 
+            this.btnSave2.Location = new System.Drawing.Point(277, 329);
+            this.btnSave2.Name = "btnSave2";
+            this.btnSave2.Size = new System.Drawing.Size(89, 31);
+            this.btnSave2.TabIndex = 20;
+            this.btnSave2.Text = "保存";
+            this.btnSave2.UseVisualStyleBackColor = true;
+            this.btnSave2.Click += new System.EventHandler(this.btnSave2_Click);
+            // 
+            // btnStop2
+            // 
+            this.btnStop2.Location = new System.Drawing.Point(277, 292);
+            this.btnStop2.Name = "btnStop2";
+            this.btnStop2.Size = new System.Drawing.Size(89, 31);
+            this.btnStop2.TabIndex = 19;
+            this.btnStop2.Text = "停止";
+            this.btnStop2.UseVisualStyleBackColor = true;
+            this.btnStop2.Click += new System.EventHandler(this.btnStop2_Click);
+            // 
+            // comboUnit2
+            // 
+            this.comboUnit2.FormattingEnabled = true;
+            this.comboUnit2.Items.AddRange(new object[] {
+            "小时",
+            "分钟",
+            "秒"});
+            this.comboUnit2.Location = new System.Drawing.Point(115, 287);
+            this.comboUnit2.Name = "comboUnit2";
+            this.comboUnit2.Size = new System.Drawing.Size(121, 29);
+            this.comboUnit2.TabIndex = 18;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(2, 291);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(120, 21);
+            this.label16.TabIndex = 17;
+            this.label16.Text = "时间单位：";
+            // 
+            // getPoint2
+            // 
+            this.getPoint2.Location = new System.Drawing.Point(115, 331);
+            this.getPoint2.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.getPoint2.Name = "getPoint2";
+            this.getPoint2.Size = new System.Drawing.Size(120, 31);
+            this.getPoint2.TabIndex = 16;
+            this.getPoint2.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(21, 336);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(98, 21);
+            this.label17.TabIndex = 15;
+            this.label17.Text = "采样点：";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(243, 81);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(22, 21);
+            this.label18.TabIndex = 11;
+            this.label18.Text = "A";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(243, 29);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(22, 21);
+            this.label19.TabIndex = 6;
+            this.label19.Text = "V";
+            // 
+            // btnStart2
+            // 
+            this.btnStart2.Location = new System.Drawing.Point(277, 253);
+            this.btnStart2.Name = "btnStart2";
+            this.btnStart2.Size = new System.Drawing.Size(89, 31);
+            this.btnStart2.TabIndex = 10;
+            this.btnStart2.Text = "执行";
+            this.btnStart2.UseVisualStyleBackColor = true;
+            this.btnStart2.Click += new System.EventHandler(this.btnStart2_Click);
+            // 
+            // closeTime2
+            // 
+            this.closeTime2.Location = new System.Drawing.Point(115, 239);
+            this.closeTime2.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.closeTime2.Name = "closeTime2";
+            this.closeTime2.Size = new System.Drawing.Size(120, 31);
+            this.closeTime2.TabIndex = 9;
+            this.closeTime2.Value = new decimal(new int[] {
+            4,
+            0,
+            0,
+            0});
+            // 
+            // openTime2
+            // 
+            this.openTime2.Location = new System.Drawing.Point(115, 186);
+            this.openTime2.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.openTime2.Name = "openTime2";
+            this.openTime2.Size = new System.Drawing.Size(120, 31);
+            this.openTime2.TabIndex = 8;
+            this.openTime2.Value = new decimal(new int[] {
+            4,
+            0,
+            0,
+            0});
+            // 
+            // cycleNum2
+            // 
+            this.cycleNum2.Location = new System.Drawing.Point(115, 130);
+            this.cycleNum2.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
+            this.cycleNum2.Name = "cycleNum2";
+            this.cycleNum2.Size = new System.Drawing.Size(120, 31);
+            this.cycleNum2.TabIndex = 7;
+            this.cycleNum2.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            // 
+            // eleVal2
+            // 
+            this.eleVal2.Location = new System.Drawing.Point(117, 75);
+            this.eleVal2.Name = "eleVal2";
+            this.eleVal2.Size = new System.Drawing.Size(120, 31);
+            this.eleVal2.TabIndex = 6;
+            // 
+            // volteVal2
+            // 
+            this.volteVal2.DecimalPlaces = 2;
+            this.volteVal2.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.volteVal2.Location = new System.Drawing.Point(117, 23);
+            this.volteVal2.Maximum = new decimal(new int[] {
+            200,
+            0,
+            0,
+            0});
+            this.volteVal2.Name = "volteVal2";
+            this.volteVal2.Size = new System.Drawing.Size(120, 31);
+            this.volteVal2.TabIndex = 5;
+            this.volteVal2.ValueChanged += new System.EventHandler(this.volteVal2_ValueChanged);
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(4, 244);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(120, 21);
+            this.label20.TabIndex = 4;
+            this.label20.Text = "关闭时间：";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(4, 191);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(120, 21);
+            this.label21.TabIndex = 3;
+            this.label21.Text = "打开时间：";
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(4, 133);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(120, 21);
+            this.label22.TabIndex = 2;
+            this.label22.Text = "循环次数：";
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(44, 81);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(76, 21);
+            this.label23.TabIndex = 1;
+            this.label23.Text = "电流：";
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(44, 25);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(76, 21);
+            this.label24.TabIndex = 0;
+            this.label24.Text = "电压：";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1301, 733);
             this.Controls.Add(this.tabControl1);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "MainForm";
+            this.ShowIcon = false;
             this.Text = "电源控制系统";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
@@ -505,6 +960,21 @@
             ((System.ComponentModel.ISupportInitialize)(this.cycleNum)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.eleVal)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.volteVal)).EndInit();
+            this.tabPage1.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.port2)).EndInit();
+            this.groupBox5.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.eleChart2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.volChart2)).EndInit();
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.getPoint2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.closeTime2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.openTime2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cycleNum2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.eleVal2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.volteVal2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -543,6 +1013,37 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnStop;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button btnOpen2;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.NumericUpDown port2;
+        private IPAddressControlLib.IPAddressControl ipAddress2;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.DataVisualization.Charting.Chart eleChart2;
+        private System.Windows.Forms.DataVisualization.Charting.Chart volChart2;
+        private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.Button btnSave2;
+        private System.Windows.Forms.Button btnStop2;
+        private System.Windows.Forms.ComboBox comboUnit2;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.NumericUpDown getPoint2;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Button btnStart2;
+        private System.Windows.Forms.NumericUpDown closeTime2;
+        private System.Windows.Forms.NumericUpDown openTime2;
+        private System.Windows.Forms.NumericUpDown cycleNum2;
+        private System.Windows.Forms.NumericUpDown eleVal2;
+        private System.Windows.Forms.NumericUpDown volteVal2;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Label label24;
     }
 }
 
