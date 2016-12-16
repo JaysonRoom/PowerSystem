@@ -231,9 +231,66 @@ namespace PowerSystem.DALCommom
             return error;
         }
 
-        public static void SaveToExcel()
-        {
-            Microsoft.Office.Interop.Excel.Application xlApp = new Microsoft.Office.Interop.Excel.Application();
+        public static void SaveToExcel(DataTable dt, string saveFileName)
+        {            
+            SaveFileDialog saveDialog = new SaveFileDialog();
+            saveDialog.DefaultExt = "xls";
+            saveDialog.Filter = "Excel文件|*.xls";
+            saveDialog.FileName = "电源控制测试结果" + System.DateTime.Now.ToString("yyyyMMddHHmmss"); ;
+            saveDialog.ShowDialog();
+            saveFileName = saveDialog.FileName;
+            if (saveFileName.IndexOf(":") < 0) return; //被点了取消 
+            Microsoft.Office.Interop.Excel.Application xlApp;
+            try
+            {
+                xlApp = new Microsoft.Office.Interop.Excel.Application();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("无法创建Excel对象，可能您的机子未安装Excel");
+                return;
+            }
+            finally
+            {
+            }
+            Microsoft.Office.Interop.Excel.Workbooks workbooks = xlApp.Workbooks;
+            Microsoft.Office.Interop.Excel.Workbook workbook = workbooks.Add(Microsoft.Office.Interop.Excel.XlWBATemplate.xlWBATWorksheet);
+            Microsoft.Office.Interop.Excel.Worksheet worksheet = (Microsoft.Office.Interop.Excel.Worksheet)workbook.Worksheets[1];//取得sheet1
+                                                                                                                                  //写Title
+            int titleRowCount = 0;
+            //写入列标题
+            for (int i = 0; i <= dt.Columns.Count - 1; i++)
+            {
+                worksheet.Cells[titleRowCount + 1, i + 1] = dt.Columns[i].ColumnName;
+            }
+            //写入数值
+            for (int r = 0; r <= dt.Rows.Count - 1; r++)
+            {
+                for (int i = 0; i <= dt.Columns.Count - 1; i++)
+                {
+                    worksheet.Cells[r + titleRowCount + 2, i + 1] = dt.Rows[r][i].ToString();
+                }
+                System.Windows.Forms.Application.DoEvents();
+            }
+            worksheet.Columns.EntireColumn.AutoFit();//列宽自适应
+
+            if (saveFileName != "")
+            {
+                try
+                {
+                    workbook.Saved = true;
+                    workbook.SaveCopyAs(saveFileName);
+                    //fileSaved = true;
+                }
+                catch (Exception ex)
+                {
+                    //fileSaved = false;
+                    MessageBox.Show("导出文件时出错,文件可能正被打开！n" + ex.Message);
+                }
+            }
+
+            xlApp.Quit();
+            GC.Collect();//强行销毁 
         }
 
         public static void SaveToCSV(DataTable dt ,string fullPath)

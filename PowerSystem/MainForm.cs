@@ -363,12 +363,13 @@ namespace PowerSystem
                 dt.Rows.Add(dr);
             }
 
-            CommonMethod.SaveToCSV(dt, "");
+            CommonMethod.SaveToCSV(dt, "");//
+           // CommonMethod.SaveToExcel(dt, "");
         }
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-           // Application.Exit();
+            Application.Exit();
         }
 
         //--------------------------------------------------------第2部分电源------------------------------------------------
