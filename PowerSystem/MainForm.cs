@@ -54,10 +54,10 @@ namespace PowerSystem
             ipAddress2.Text = CGloabal.g_InstrPowerModule2.ipAdress;
             port2.Value = CGloabal.g_InstrPowerModule2.port;
 
-            comboUnit.SelectedIndex = 1;//设置
+            comboUnit.SelectedIndex =0;//设置
             InitChart();
 
-            comboUnit2.SelectedIndex = 1;//设置
+            comboUnit2.SelectedIndex = 0;//设置
             InitChart2();
         }
 
@@ -140,12 +140,15 @@ namespace PowerSystem
             //}
 
             //触发开始
+            BeginTime = DateTime.Now;
             startTimer.Interval = MixHelper.ReturnInterval(comboUnit.Text,1, open,close,point);
             startTimer.Enabled = true;
         }
 
         //
         int openPoint = 0;
+        
+        DateTime BeginTime;
 
         private void OpenTimerTick(object sender, EventArgs e) {
             //采样点数
@@ -182,9 +185,11 @@ namespace PowerSystem
             }
             else {
                 //读取电压和电流        
+                TimeSpan xVal = DateTime.Now - BeginTime;
+                string xTime = xVal.Minutes + ":" + xVal.Seconds;
                 PowerDriver.ReadVolAndEleCommand(CGloabal.g_InstrPowerModule.nHandle, ref reVlote, ref reElect);
-                volChart.Series[0].Points.AddXY(DateTime.Now.ToString("mm:ss"),reVlote);
-                eleChart.Series[0].Points.AddXY(DateTime.Now.ToString("mm:ss"), reElect);
+                volChart.Series[0].Points.AddXY(xTime, reVlote);
+                eleChart.Series[0].Points.AddXY(xTime, reElect);
             }
         }
 
@@ -217,10 +222,12 @@ namespace PowerSystem
             }
             else
             {
+                TimeSpan xVal = DateTime.Now - BeginTime;
+                string xTime = xVal.Minutes + ":" + xVal.Seconds;
                 //读取电压和电流        
                 PowerDriver.ReadVolAndEleCommand(CGloabal.g_InstrPowerModule.nHandle, ref reVlote, ref reElect);
-                volChart.Series[0].Points.AddXY(DateTime.Now.ToString("mm:ss"), reVlote);
-                eleChart.Series[0].Points.AddXY(DateTime.Now.ToString("mm:ss"), reElect);
+                volChart.Series[0].Points.AddXY(xTime, reVlote);
+                eleChart.Series[0].Points.AddXY(xTime, reElect);
             }
         }
 
@@ -351,14 +358,16 @@ namespace PowerSystem
             dt.Columns.Add("序号", System.Type.GetType("System.String"));
             dt.Columns.Add("时间", System.Type.GetType("System.String"));
             dt.Columns.Add("电压", System.Type.GetType("System.String"));
+            dt.Columns.Add("电流", System.Type.GetType("System.String"));
 
-           
+
             for (int i = 0; i < volChart.Series[0].Points.Count; i++)
             {
                 DataRow dr = dt.NewRow();
                 dr["序号"] = i+1;
                 dr["时间"] = volChart.Series[0].Points[i].AxisLabel;
                 dr["电压"] = volChart.Series[0].Points[i].YValues[0];
+                dr["电流"] = eleChart.Series[0].Points[i].YValues[0];
 
                 dt.Rows.Add(dr);
             }
@@ -440,38 +449,30 @@ namespace PowerSystem
             int error = 0;
             string strErrMsg = "";
             //设置电压和电流
-            //error = PowerDriver.SetVolAndEle(CGloabal.g_InstrPowerModule2.nHandle, vlo, ele, strErrMsg);
-            //if (error < 0)
-            //{
-            //    CommonMethod.ShowHintInfor(eHintInfoType.error, strErrMsg);
-            //    return;
-            //}
+            error = PowerDriver.SetVolAndEle(CGloabal.g_InstrPowerModule2.nHandle, vlo, ele, strErrMsg);
+            if (error < 0)
+            {
+                CommonMethod.ShowHintInfor(eHintInfoType.error, strErrMsg);
+                return;
+            }
 
-            //打开命令         
-            //error = PowerDriver.SetOpenCommand(CGloabal.g_InstrPowerModule2.nHandle, strErrMsg);
-            //if (error < 0)
-            //{
-            //    CommonMethod.ShowHintInfor(eHintInfoType.error, strErrMsg);
-            //    return;
-            //}
+            //打开命令
+            error = PowerDriver.SetOpenCommand(CGloabal.g_InstrPowerModule2.nHandle, strErrMsg);
+            if (error < 0)
+            {
+                CommonMethod.ShowHintInfor(eHintInfoType.error, strErrMsg);
+                return;
+            }
 
+            Begin2Time = DateTime.Now;
             //触发开始
             startTimer2.Interval = MixHelper.ReturnInterval(comboUnit2.Text, 1, open, close, point);
             startTimer2.Enabled = true;
-        }
-
-        private void btnStop2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnSave2_Click(object sender, EventArgs e)
-        {
-
-        }
+        }       
 
         //
         int openPoint2 = 0;
+        DateTime Begin2Time;
 
         private void OpenTimerTick2(object sender, EventArgs e)
         {
@@ -509,6 +510,8 @@ namespace PowerSystem
             }
             else
             {
+                TimeSpan xVal = DateTime.Now - BeginTime;
+                string xTime = xVal.Minutes + ":" + xVal.Seconds;
                 //读取电压和电流        
                 PowerDriver.ReadVolAndEleCommand(CGloabal.g_InstrPowerModule2.nHandle, ref reVlote, ref reElect);
                 volChart2.Series[0].Points.AddXY(DateTime.Now.ToString("mm:ss"), reVlote);
@@ -545,11 +548,44 @@ namespace PowerSystem
             }
             else
             {
+                TimeSpan x2Val = DateTime.Now - Begin2Time;
+                string x2Time = x2Val.Minutes + ":" + x2Val.Seconds;
                 //读取电压和电流        
                 PowerDriver.ReadVolAndEleCommand(CGloabal.g_InstrPowerModule2.nHandle, ref reVlote, ref reElect);
                 volChart2.Series[0].Points.AddXY(DateTime.Now.ToString("mm:ss"), reVlote);
                 eleChart2.Series[0].Points.AddXY(DateTime.Now.ToString("mm:ss"), reElect);
             }
+        }
+
+        private void btnStop2_Click(object sender, EventArgs e)
+        {
+            startTimer2.Enabled = false;
+            openPoint2 = 0;
+            closeTimer2.Enabled = false;
+            closePoint2 = 0;
+        }
+
+        private void btnSave2_Click(object sender, EventArgs e)
+        {
+            DataTable dt = new DataTable();
+            dt.Columns.Add("序号", System.Type.GetType("System.String"));
+            dt.Columns.Add("时间", System.Type.GetType("System.String"));
+            dt.Columns.Add("电压", System.Type.GetType("System.String"));
+            dt.Columns.Add("电流", System.Type.GetType("System.String"));
+
+
+            for (int i = 0; i < volChart2.Series[0].Points.Count; i++)
+            {
+                DataRow dr = dt.NewRow();
+                dr["序号"] = i + 1;
+                dr["时间"] = volChart2.Series[0].Points[i].AxisLabel;
+                dr["电压"] = volChart2.Series[0].Points[i].YValues[0];
+                dr["电流"] = eleChart2.Series[0].Points[i].YValues[0];
+
+                dt.Rows.Add(dr);
+            }
+
+            CommonMethod.SaveToCSV(dt, "");//
         }
 
         //全部结束就结束测试
