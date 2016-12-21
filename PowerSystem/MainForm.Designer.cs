@@ -53,6 +53,7 @@
             this.eleChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.volChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnView = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnStop = new System.Windows.Forms.Button();
             this.comboUnit = new System.Windows.Forms.ComboBox();
@@ -84,6 +85,7 @@
             this.eleChart2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.volChart2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.btnView2 = new System.Windows.Forms.Button();
             this.btnSave2 = new System.Windows.Forms.Button();
             this.btnStop2 = new System.Windows.Forms.Button();
             this.comboUnit2 = new System.Windows.Forms.ComboBox();
@@ -252,8 +254,6 @@
             // eleChart
             // 
             chartArea1.AxisX.Interval = 1D;
-            chartArea1.AxisX.Maximum = 100D;
-            chartArea1.AxisX.Minimum = 0D;
             chartArea1.AxisY.LogarithmBase = 5D;
             chartArea1.AxisY.Minimum = 0D;
             chartArea1.Name = "ChartArea1";
@@ -265,7 +265,7 @@
             this.eleChart.Name = "eleChart";
             series1.BorderWidth = 3;
             series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             series1.Color = System.Drawing.Color.Red;
             series1.Legend = "Legend1";
             series1.Name = "电流";
@@ -291,7 +291,7 @@
             this.volChart.Name = "volChart";
             series2.BorderWidth = 3;
             series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             series2.Color = System.Drawing.Color.DodgerBlue;
             series2.Legend = "Legend1";
             series2.Name = "电压";
@@ -304,6 +304,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.btnView);
             this.groupBox2.Controls.Add(this.btnSave);
             this.groupBox2.Controls.Add(this.btnStop);
             this.groupBox2.Controls.Add(this.comboUnit);
@@ -328,6 +329,17 @@
             this.groupBox2.Size = new System.Drawing.Size(382, 408);
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
+            // 
+            // btnView
+            // 
+            this.btnView.Cursor = System.Windows.Forms.Cursors.Default;
+            this.btnView.Location = new System.Drawing.Point(277, 366);
+            this.btnView.Name = "btnView";
+            this.btnView.Size = new System.Drawing.Size(89, 31);
+            this.btnView.TabIndex = 21;
+            this.btnView.Text = "汇总";
+            this.btnView.UseVisualStyleBackColor = true;
+            this.btnView.Click += new System.EventHandler(this.btnView_Click);
             // 
             // btnSave
             // 
@@ -649,7 +661,7 @@
             this.eleChart2.Name = "eleChart2";
             series3.BorderWidth = 3;
             series3.ChartArea = "ChartArea1";
-            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             series3.Color = System.Drawing.Color.Red;
             series3.Legend = "Legend1";
             series3.Name = "电流";
@@ -675,7 +687,7 @@
             this.volChart2.Name = "volChart2";
             series4.BorderWidth = 3;
             series4.ChartArea = "ChartArea1";
-            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             series4.Color = System.Drawing.Color.DodgerBlue;
             series4.Legend = "Legend1";
             series4.Name = "电压";
@@ -688,6 +700,7 @@
             // 
             // groupBox6
             // 
+            this.groupBox6.Controls.Add(this.btnView2);
             this.groupBox6.Controls.Add(this.btnSave2);
             this.groupBox6.Controls.Add(this.btnStop2);
             this.groupBox6.Controls.Add(this.comboUnit2);
@@ -712,6 +725,16 @@
             this.groupBox6.Size = new System.Drawing.Size(382, 408);
             this.groupBox6.TabIndex = 4;
             this.groupBox6.TabStop = false;
+            // 
+            // btnView2
+            // 
+            this.btnView2.Location = new System.Drawing.Point(277, 366);
+            this.btnView2.Name = "btnView2";
+            this.btnView2.Size = new System.Drawing.Size(89, 31);
+            this.btnView2.TabIndex = 21;
+            this.btnView2.Text = "汇总";
+            this.btnView2.UseVisualStyleBackColor = true;
+            this.btnView2.Click += new System.EventHandler(this.btnView2_Click);
             // 
             // btnSave2
             // 
@@ -860,7 +883,13 @@
             // 
             // eleVal2
             // 
+            this.eleVal2.DecimalPlaces = 1;
             this.eleVal2.Location = new System.Drawing.Point(117, 75);
+            this.eleVal2.Maximum = new decimal(new int[] {
+            15,
+            0,
+            0,
+            0});
             this.eleVal2.Name = "eleVal2";
             this.eleVal2.Size = new System.Drawing.Size(120, 31);
             this.eleVal2.TabIndex = 6;
@@ -874,11 +903,6 @@
             0,
             65536});
             this.volteVal2.Location = new System.Drawing.Point(117, 23);
-            this.volteVal2.Maximum = new decimal(new int[] {
-            200,
-            0,
-            0,
-            0});
             this.volteVal2.Name = "volteVal2";
             this.volteVal2.Size = new System.Drawing.Size(120, 31);
             this.volteVal2.TabIndex = 5;
@@ -1042,6 +1066,8 @@
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.Button btnView;
+        private System.Windows.Forms.Button btnView2;
     }
 }
 

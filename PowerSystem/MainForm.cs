@@ -1,4 +1,5 @@
 ﻿using PowerSystem.DALCommom;
+using PowerSystem.Forms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -124,20 +125,20 @@ namespace PowerSystem
             int error = 0;
             string strErrMsg = "";
             //设置电压和电流
-            //error = PowerDriver.SetVolAndEle(CGloabal.g_InstrPowerModule.nHandle, vlo, ele, strErrMsg);
-            //if (error < 0)
-            //{
-            //    CommonMethod.ShowHintInfor(eHintInfoType.error, strErrMsg);
-            //    return;
-            //}
+            error = PowerDriver.SetVolAndEle(CGloabal.g_InstrPowerModule.nHandle, vlo, ele, strErrMsg);
+            if (error < 0)
+            {
+                CommonMethod.ShowHintInfor(eHintInfoType.error, strErrMsg);
+                return;
+            }
 
-            //打开命令         
-            //error = PowerDriver.SetOpenCommand(CGloabal.g_InstrPowerModule.nHandle, strErrMsg);
-            //if (error < 0)
-            //{
-            //    CommonMethod.ShowHintInfor(eHintInfoType.error, strErrMsg);
-            //    return;
-            //}
+            //打开命令
+            error = PowerDriver.SetOpenCommand(CGloabal.g_InstrPowerModule.nHandle, strErrMsg);
+            if (error < 0)
+            {
+                CommonMethod.ShowHintInfor(eHintInfoType.error, strErrMsg);
+                return;
+            }
 
             //触发开始
             BeginTime = DateTime.Now;
@@ -171,12 +172,12 @@ namespace PowerSystem
                 startTimer.Enabled = false;
                 openPoint = 0;
                 //已采样结束，发送关闭指令
-                //int error = PowerDriver.SetCloseCommand(CGloabal.g_InstrPowerModule.nHandle, strErrMsg);
-                //if (error < 0)
-                //{
-                //    CommonMethod.ShowHintInfor(eHintInfoType.error, strErrMsg);
-                //    return;
-                //}
+                int error = PowerDriver.SetCloseCommand(CGloabal.g_InstrPowerModule.nHandle, strErrMsg);
+                if (error < 0)
+                {
+                    CommonMethod.ShowHintInfor(eHintInfoType.error, strErrMsg);
+                    return;
+                }
 
                 //触发结束 
                 var close = closeTime.Value;
@@ -208,12 +209,12 @@ namespace PowerSystem
                 closeTimer.Enabled = false;
                 closePoint = 0;
                 //已采样结束，发送关闭指令
-                //int error = PowerDriver.SetOpenCommand(CGloabal.g_InstrPowerModule.nHandle, strErrMsg);
-                //if (error < 0)
-                //{
-                //    CommonMethod.ShowHintInfor(eHintInfoType.error, strErrMsg);
-                //    return;
-                //}
+                int error = PowerDriver.SetOpenCommand(CGloabal.g_InstrPowerModule.nHandle, strErrMsg);
+                if (error < 0)
+                {
+                    CommonMethod.ShowHintInfor(eHintInfoType.error, strErrMsg);
+                    return;
+                }
 
                 //触发开始 
                 var open = openTime.Value;
@@ -496,12 +497,12 @@ namespace PowerSystem
                 startTimer2.Enabled = false;
                 openPoint2 = 0;
                 //已采样结束，发送关闭指令
-                //int error = PowerDriver.SetCloseCommand(CGloabal.g_InstrPowerModule2.nHandle, strErrMsg);
-                //if (error < 0)
-                //{
-                //    CommonMethod.ShowHintInfor(eHintInfoType.error, strErrMsg);
-                //    return;
-                //}
+                int error = PowerDriver.SetCloseCommand(CGloabal.g_InstrPowerModule2.nHandle, strErrMsg);
+                if (error < 0)
+                {
+                    CommonMethod.ShowHintInfor(eHintInfoType.error, strErrMsg);
+                    return;
+                }
 
                 //触发结束 
                 var close = closeTime2.Value;
@@ -534,12 +535,12 @@ namespace PowerSystem
                 closeTimer2.Enabled = false;
                 closePoint2 = 0;
                 //已采样结束，发送关闭指令
-                //int error = PowerDriver.SetOpenCommand(CGloabal.g_InstrPowerModule2.nHandle, strErrMsg);
-                //if (error < 0)
-                //{
-                //    CommonMethod.ShowHintInfor(eHintInfoType.error, strErrMsg);
-                //    return;
-                //}
+                int error = PowerDriver.SetOpenCommand(CGloabal.g_InstrPowerModule2.nHandle, strErrMsg);
+                if (error < 0)
+                {
+                    CommonMethod.ShowHintInfor(eHintInfoType.error, strErrMsg);
+                    return;
+                }
 
                 //触发开始 
                 var open = openTime2.Value;
@@ -656,6 +657,45 @@ namespace PowerSystem
             //int MaxVal = (int)((openT + closeT) * xVal);
             // volChart.ChartAreas[0].AxisX.Maximum = curD.ToString("mm:ss");// MaxVal;
             //eleChart.ChartAreas[0].AxisX.Maximum = MaxVal;            
+        }
+
+        private void btnView_Click(object sender, EventArgs e)
+        {
+            ChartForm cf = new ChartForm(volChart ,eleChart);
+            cf.ShowDialog();
+            ////volChart.ChartAreas[0].AxisX.Interval = 0.05;
+            ////volChart.ChartAreas[0].AxisX.MajorGrid.Enabled = false;
+
+            ////eleChart.ChartAreas[0].AxisX.Interval = 0.05;
+            ////eleChart.ChartAreas[0].AxisX.MajorGrid.Enabled = false;
+
+            //volChart.ChartAreas[0].CursorX.IsUserEnabled = true;
+            //volChart.ChartAreas[0].CursorX.IsUserSelectionEnabled = true;
+            //volChart.ChartAreas[0].AxisX.ScaleView.Zoomable = true;
+            //volChart.ChartAreas[0].CursorY.IsUserEnabled = true;
+            //volChart.ChartAreas[0].CursorY.IsUserSelectionEnabled = true;
+            //volChart.ChartAreas[0].AxisY.ScaleView.Zoomable = true;
+
+            ////将滚动条嵌入到坐标轴中
+            //volChart.ChartAreas[0].AxisX.ScrollBar.IsPositionedInside = true;
+            //volChart.ChartAreas[0].AxisY.ScrollBar.IsPositionedInside = true;
+
+            ////设置滚动条的按钮风格，显示所有滚动条
+            //volChart.ChartAreas[0].AxisX.ScrollBar.ButtonStyle = System.Windows.Forms.DataVisualization.Charting.ScrollBarButtonStyles.All;
+            //volChart.ChartAreas[0].AxisY.ScrollBar.ButtonStyle = System.Windows.Forms.DataVisualization.Charting.ScrollBarButtonStyles.All;
+
+            ////设置自动放大和缩小
+            //volChart.ChartAreas[0].AxisX.ScaleView.SmallScrollSize = double.NaN;
+            //volChart.ChartAreas[0].AxisX.ScaleView.SmallScrollMinSize = 1;
+            //volChart.ChartAreas[0].AxisY.ScaleView.SmallScrollSize = double.NaN;
+            //volChart.ChartAreas[0].AxisX.ScaleView.SmallScrollMinSize = 1;
+
+        }
+
+        private void btnView2_Click(object sender, EventArgs e)
+        {
+            ChartForm cf = new ChartForm(volChart2, eleChart2);
+            cf.ShowDialog();
         }
     }
 }

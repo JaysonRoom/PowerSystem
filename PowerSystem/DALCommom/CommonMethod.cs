@@ -112,6 +112,28 @@ namespace PowerSystem.DALCommom
                 }
 
             }
+            else if (strInstruName == "电源2")
+            {
+                if (CGloabal.g_InstrPowerModule.nHandle == 0)
+                {
+                    error = PowerDriver.Init(resourceName, ref CGloabal.g_InstrPowerModule.nHandle, strError);
+                    if (error < 0)
+                    {
+                        CGloabal.g_InstrPowerModule.bInternet = false;
+                        CommonMethod.ShowHintInfor(eHintInfoType.error, CGloabal.g_InstrPowerModule.strInstruName + "连接失败");
+                    }
+                    else
+                    {
+
+                        CGloabal.g_InstrPowerModule.bInternet = true;
+                    }
+                }
+                else
+                {
+                    CommonMethod.ShowHintInfor(eHintInfoType.hint, CGloabal.g_InstrPowerModule.strInstruName + "已经处于连接状态");
+                }
+
+            }
             else
             {
                 CommonMethod.ShowHintInfor(eHintInfoType.error, "错误的仪器名");
@@ -190,7 +212,7 @@ namespace PowerSystem.DALCommom
                     CGloabal.g_InstrPowerModule.port = (int)port;
                     CGloabal.g_InstrPowerModule.bInternet = true;
                 }
-                if (strInstruName == "电源2")
+                else if (strInstruName == "电源2")
                 {
                     //保存到ini文件
                     CommonMethod.WriteValueToIniFile(strFilePath, "电源2", "IP地址", strIP);
