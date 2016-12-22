@@ -434,9 +434,22 @@ namespace PowerSystem
         private void btnStart2_Click(object sender, EventArgs e)
         {
             TestSign2 = true;
-            volChart.Series[0].Points.Clear();
-            eleChart.Series[0].Points.Clear();
+            volChart2.Series[0].Points.Clear();
+            eleChart2.Series[0].Points.Clear();            
 
+            StartTime2 = System.DateTime.Now;
+            OutSign2 = false;
+            //Begin2Time = DateTime.Now;
+            //触发开始
+            // startTimer2.Interval = MixHelper.ReturnInterval(comboUnit2.Text, 1, open, close, point);
+            // startTimer2.Enabled = true;
+
+            Thread t = new Thread(new ThreadStart(RunProcess2));
+            t.IsBackground = true;
+            t.Start();
+        }
+        bool OutSign2 = false;
+        private void RunProcess2() {
             double vlo = (double)volteVal2.Value;
             double ele = (double)eleVal2.Value;
             var cyc = cycleNum2.Value;
@@ -445,10 +458,9 @@ namespace PowerSystem
             var close = closeTime2.Value;
             int point = (int)getPoint2.Value;
 
-            StartTime2 = System.DateTime.Now;
-
             int error = 0;
             string strErrMsg = "";
+            double reVlote = 0, reElect = 0;
             //设置电压和电流
             error = PowerDriver.SetVolAndEle(CGloabal.g_InstrPowerModule2.nHandle, vlo, ele, strErrMsg);
             if (error < 0)
@@ -456,6 +468,10 @@ namespace PowerSystem
                 CommonMethod.ShowHintInfor(eHintInfoType.error, strErrMsg);
                 return;
             }
+
+            //读取应该间隔多少时间取一个点
+            int OpenReadtimer = MixHelper.ReturnInterval(comboUnit2.Text, 1, open, close, point);
+            int CloseReadTimer = MixHelper.ReturnInterval(comboUnit2.Text, 0, open, close, point);
 
             //打开命令
             error = PowerDriver.SetOpenCommand(CGloabal.g_InstrPowerModule2.nHandle, strErrMsg);
@@ -465,10 +481,55 @@ namespace PowerSystem
                 return;
             }
 
-            Begin2Time = DateTime.Now;
-            //触发开始
-            startTimer2.Interval = MixHelper.ReturnInterval(comboUnit2.Text, 1, open, close, point);
-            startTimer2.Enabled = true;
+            while (cyc > 0)
+            {
+                cyc--;
+                //打开命令
+                error = PowerDriver.SetOpenCommand(CGloabal.g_InstrPowerModule2.nHandle, strErrMsg);
+                if (error < 0)
+                {
+                    CommonMethod.ShowHintInfor(eHintInfoType.error, strErrMsg);
+                    return;
+                }
+                for (int i = 0; i < point; i++)
+                {
+                    if (OutSign2)
+                    {//为true时则终止测试
+                        error = PowerDriver.SetCloseCommand(CGloabal.g_InstrPowerModule2.nHandle, strErrMsg);
+                        return;
+                    }
+                    Thread.Sleep(OpenReadtimer);
+                    TimeSpan ts = DateTime.Now - StartTime2;
+                    string xOpenVal4 = ts.Minutes + ":" + ts.Seconds;
+                    //读取电压和电流        
+                    PowerDriver.ReadVolAndEleCommand(CGloabal.g_InstrPowerModule2.nHandle, ref reVlote, ref reElect);
+                    volChart2.Series[0].Points.AddXY(xOpenVal4, reVlote);
+                    eleChart2.Series[0].Points.AddXY(xOpenVal4, reElect);
+                }
+
+                //发送关闭指令
+                error = PowerDriver.SetCloseCommand(CGloabal.g_InstrPowerModule2.nHandle, strErrMsg);
+                if (error < 0)
+                {
+                    CommonMethod.ShowHintInfor(eHintInfoType.error, strErrMsg);
+                    return;
+                }
+                for (int i = 0; i < point; i++)
+                {
+                    if (OutSign2)
+                    {//为true时则终止测试
+                        error = PowerDriver.SetCloseCommand(CGloabal.g_InstrPowerModule2.nHandle, strErrMsg);
+                        return;
+                    }
+                    Thread.Sleep(CloseReadTimer);
+                    TimeSpan ts = DateTime.Now - StartTime2;
+                    string xCloseVal4 = ts.Minutes + ":" + ts.Seconds;
+                    //读取电压和电流        
+                    PowerDriver.ReadVolAndEleCommand(CGloabal.g_InstrPowerModule2.nHandle, ref reVlote, ref reElect);
+                    volChart2.Series[0].Points.AddXY(xCloseVal4, reVlote);
+                    eleChart2.Series[0].Points.AddXY(xCloseVal4, reElect);
+                }
+            }
         }       
 
         //
@@ -477,93 +538,91 @@ namespace PowerSystem
 
         private void OpenTimerTick2(object sender, EventArgs e)
         {
-            //采样点数
-            int point = (int)getPoint2.Value;
-            DateTime curr = System.DateTime.Now;
+            ////采样点数
+            //int point = (int)getPoint2.Value;
+            //DateTime curr = System.DateTime.Now;
+            //TimeSpan ts = curr.Subtract(StartTime2).Duration();           
+            //double total = ts.Days * 86400 + ts.Hours * 3600 + ts.Minutes * 60 + ts.Seconds;        
 
-            TimeSpan ts = curr.Subtract(StartTime2).Duration();
-            //dateDiff = ts.Days.ToString() + "天" + ts.Hours.ToString() + "小时" + ts.Minutes.ToString() + "分钟" + ts.Seconds.ToString() + "秒";
-            double total = ts.Days * 86400 + ts.Hours * 3600 + ts.Minutes * 60 + ts.Seconds;
-            // int MaxVal = SumTime();
+            //openPoint2++;
+            //double reVlote = 0; double reElect = 0; string strErrMsg = "";
+            //if (openPoint2 > point)
+            //{
+            //    if (OverTest2() < 0)
+            //    {
+            //        return;
+            //    }
+            //    startTimer2.Enabled = false;
+            //    openPoint2 = 0;
+            //    //已采样结束，发送关闭指令
+            //    int error = PowerDriver.SetCloseCommand(CGloabal.g_InstrPowerModule2.nHandle, strErrMsg);
+            //    if (error < 0)
+            //    {
+            //        CommonMethod.ShowHintInfor(eHintInfoType.error, strErrMsg);
+            //        return;
+            //    }
 
-            openPoint2++;
-            double reVlote = 0; double reElect = 0; string strErrMsg = "";
-            if (openPoint2 > point)
-            {
-                if (OverTest2() < 0)
-                {
-                    return;
-                }
-                startTimer2.Enabled = false;
-                openPoint2 = 0;
-                //已采样结束，发送关闭指令
-                int error = PowerDriver.SetCloseCommand(CGloabal.g_InstrPowerModule2.nHandle, strErrMsg);
-                if (error < 0)
-                {
-                    CommonMethod.ShowHintInfor(eHintInfoType.error, strErrMsg);
-                    return;
-                }
-
-                //触发结束 
-                var close = closeTime2.Value;
-                closeTimer.Interval = MixHelper.ReturnInterval(comboUnit2.Text, 0, 0, close, point);
-                closeTimer.Enabled = true;
-            }
-            else
-            {
-                TimeSpan xVal = DateTime.Now - BeginTime;
-                string xTime = xVal.Minutes + ":" + xVal.Seconds;
-                //读取电压和电流        
-                PowerDriver.ReadVolAndEleCommand(CGloabal.g_InstrPowerModule2.nHandle, ref reVlote, ref reElect);
-                volChart2.Series[0].Points.AddXY(DateTime.Now.ToString("mm:ss"), reVlote);
-                eleChart2.Series[0].Points.AddXY(DateTime.Now.ToString("mm:ss"), reElect);
-            }
+            //    //触发结束 
+            //    var close = closeTime2.Value;
+            //    closeTimer.Interval = MixHelper.ReturnInterval(comboUnit2.Text, 0, 0, close, point);
+            //    closeTimer.Enabled = true;
+            //}
+            //else
+            //{
+            //    TimeSpan xVal = DateTime.Now - BeginTime;
+            //    string xTime = xVal.Minutes + ":" + xVal.Seconds;
+            //    //读取电压和电流        
+            //    PowerDriver.ReadVolAndEleCommand(CGloabal.g_InstrPowerModule2.nHandle, ref reVlote, ref reElect);
+            //    volChart2.Series[0].Points.AddXY(DateTime.Now.ToString("mm:ss"), reVlote);
+            //    eleChart2.Series[0].Points.AddXY(DateTime.Now.ToString("mm:ss"), reElect);
+            //}
         }
 
         int closePoint2 = 0;
         private void CloseTimerTick2(object sender, EventArgs e)
         {
-            int point = (int)getPoint2.Value;
-            closePoint2++;
-            double reVlote = 0; double reElect = 0; string strErrMsg = "";
-            if (closePoint2 > point)
-            {
-                if (OverTest2() < 0)
-                {
-                    return;
-                }
-                closeTimer2.Enabled = false;
-                closePoint2 = 0;
-                //已采样结束，发送关闭指令
-                int error = PowerDriver.SetOpenCommand(CGloabal.g_InstrPowerModule2.nHandle, strErrMsg);
-                if (error < 0)
-                {
-                    CommonMethod.ShowHintInfor(eHintInfoType.error, strErrMsg);
-                    return;
-                }
+            //int point = (int)getPoint2.Value;
+            //closePoint2++;
+            //double reVlote = 0; double reElect = 0; string strErrMsg = "";
+            //if (closePoint2 > point)
+            //{
+            //    if (OverTest2() < 0)
+            //    {
+            //        return;
+            //    }
+            //    closeTimer2.Enabled = false;
+            //    closePoint2 = 0;
+            //    //已采样结束，发送关闭指令
+            //    int error = PowerDriver.SetOpenCommand(CGloabal.g_InstrPowerModule2.nHandle, strErrMsg);
+            //    if (error < 0)
+            //    {
+            //        CommonMethod.ShowHintInfor(eHintInfoType.error, strErrMsg);
+            //        return;
+            //    }
 
-                //触发开始 
-                var open = openTime2.Value;
-                startTimer2.Interval = MixHelper.ReturnInterval(comboUnit2.Text, 1, open, 0, point);
-                startTimer2.Enabled = true;
-            }
-            else
-            {
-                TimeSpan x2Val = DateTime.Now - Begin2Time;
-                string x2Time = x2Val.Minutes + ":" + x2Val.Seconds;
-                //读取电压和电流        
-                PowerDriver.ReadVolAndEleCommand(CGloabal.g_InstrPowerModule2.nHandle, ref reVlote, ref reElect);
-                volChart2.Series[0].Points.AddXY(DateTime.Now.ToString("mm:ss"), reVlote);
-                eleChart2.Series[0].Points.AddXY(DateTime.Now.ToString("mm:ss"), reElect);
-            }
+            //    //触发开始 
+            //    var open = openTime2.Value;
+            //    startTimer2.Interval = MixHelper.ReturnInterval(comboUnit2.Text, 1, open, 0, point);
+            //    startTimer2.Enabled = true;
+            //}
+            //else
+            //{
+            //    TimeSpan x2Val = DateTime.Now - Begin2Time;
+            //    string x2Time = x2Val.Minutes + ":" + x2Val.Seconds;
+            //    //读取电压和电流        
+            //    PowerDriver.ReadVolAndEleCommand(CGloabal.g_InstrPowerModule2.nHandle, ref reVlote, ref reElect);
+            //    volChart2.Series[0].Points.AddXY(DateTime.Now.ToString("mm:ss"), reVlote);
+            //    eleChart2.Series[0].Points.AddXY(DateTime.Now.ToString("mm:ss"), reElect);
+            //}
         }
 
         private void btnStop2_Click(object sender, EventArgs e)
         {
-            startTimer2.Enabled = false;
-            openPoint2 = 0;
-            closeTimer2.Enabled = false;
-            closePoint2 = 0;
+            OutSign2 = true;
+            //startTimer2.Enabled = false;
+            //openPoint2 = 0;
+            //closeTimer2.Enabled = false;
+            //closePoint2 = 0;
         }
 
         private void btnSave2_Click(object sender, EventArgs e)
