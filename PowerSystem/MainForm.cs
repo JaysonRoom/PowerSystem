@@ -518,7 +518,7 @@ namespace PowerSystem
                 {
                     if (OutSign2)
                     {//为true时则终止测试
-                        error = PowerDriver.SetCloseCommand(CGloabal.g_InstrPowerModule2.nHandle, strErrMsg);
+                        error = PowerDriver.SetCloseCommand(CGloabal.g_InstrPowerModule2.nHandle, strErrMsg); 
                         return;
                     }
                     Thread.Sleep(CloseReadTimer);
