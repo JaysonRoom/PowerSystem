@@ -1,4 +1,5 @@
-﻿using PowerSystem.DALCommom;
+﻿using DMSkin;
+using PowerSystem.DALCommom;
 using PowerSystem.Forms;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,7 @@ using static PowerSystem.DALCommom.CommonMethod;
 
 namespace PowerSystem
 {
-    public partial class MainForm : Form
+    public partial class MainForm : DMSkinForm
     {
         //打开//关闭
         System.Windows.Forms.Timer startTimer = new System.Windows.Forms.Timer();        
@@ -755,6 +756,30 @@ namespace PowerSystem
         {
             ChartForm cf = new ChartForm(volChart2, eleChart2);
             cf.ShowDialog();
+        }
+
+        private void powerCheck1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (powerCheck1.Checked)
+            {
+                powerPanel1.Visible = true;
+            }
+            else
+            {
+                powerPanel1.Visible = false;
+            }
+        }
+
+        private void powerCheck2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (powerCheck2.Checked)
+            {
+                powerPanel2.Visible = true;
+            }
+            else
+            {
+                powerPanel2.Visible = false;
+            }
         }
     }
 }

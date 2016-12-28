@@ -32,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DMSkin">
+      <HintPath>C:\Users\Jason\Desktop\DLL文件\DMSkin.dll</HintPath>
+    </Reference>
     <Reference Include="IPAddressControlLib">
       <HintPath>..\..\..\VS2010_WorkSpace\CircuitBoardTestSystem20160816\CircuitBoardTestSystem\bin\Debug\IPAddressControlLib.dll</HintPath>
     </Reference>
@@ -112,6 +115,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\200434391.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\电源设备1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\电源设备2.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
