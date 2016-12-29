@@ -756,30 +756,16 @@ namespace PowerSystem
         {
             ChartForm cf = new ChartForm(volChart2, eleChart2);
             cf.ShowDialog();
+        }      
+
+        private void picBox1_Click(object sender, EventArgs e)
+        {
+
         }
 
-        private void powerCheck1_CheckedChanged(object sender, EventArgs e)
+        private void picBox2_Click(object sender, EventArgs e)
         {
-            if (powerCheck1.Checked)
-            {
-                powerPanel1.Visible = true;
-            }
-            else
-            {
-                powerPanel1.Visible = false;
-            }
-        }
 
-        private void powerCheck2_CheckedChanged(object sender, EventArgs e)
-        {
-            if (powerCheck2.Checked)
-            {
-                powerPanel2.Visible = true;
-            }
-            else
-            {
-                powerPanel2.Visible = false;
-            }
         }
     }
 }

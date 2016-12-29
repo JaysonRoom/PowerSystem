@@ -122,6 +122,18 @@
   <ItemGroup>
     <None Include="Resources\电源设备2.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\保存.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\汇总.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\开始.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\停止.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
