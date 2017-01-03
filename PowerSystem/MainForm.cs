@@ -760,12 +760,12 @@ namespace PowerSystem
 
         private void picBox1_Click(object sender, EventArgs e)
         {
-
+            mianTab.SelectedIndex = 1;
         }
 
         private void picBox2_Click(object sender, EventArgs e)
         {
-
+            mianTab.SelectedIndex = 2;
         }
     }
 }
